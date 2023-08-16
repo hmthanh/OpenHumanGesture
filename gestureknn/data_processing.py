@@ -217,8 +217,11 @@ def load_db_codebook(data_file, codepath, test_data_path, train_wavlm, test_wavl
         speech_features_feat[:, :, i, :] = np.concatenate((speech_features[:, (i * FRAME_INTERVAL):], post_pad), axis=1)
     train_speech_features_feat = speech_features_feat.reshape((speech_features.shape[0], speech_features.shape[1], -1))
 
-    print('mfcc shape', mfcc.shape, 'code shape', code.shape, 'train_feat shape', train_feat.shape,
-          'speech_features shape', speech_features.shape, 'train speech features feat shape', train_speech_features_feat.shape)
+    print('mfcc.shape', mfcc.shape)
+    print('code.shape', code.shape)
+    print('train_feat.shape', train_feat.shape)
+    print('speech_features.shape', speech_features.shape)
+    print('train_speech_features_feat.shape', train_speech_features_feat.shape)
 
     print('read testing dataset...')
     test_data = np.load(test_data_path)
@@ -240,9 +243,10 @@ def load_db_codebook(data_file, codepath, test_data_path, train_wavlm, test_wavl
         speech_features_feat[:, :, i, :] = np.concatenate((test_speech_features[:, (i * FRAME_INTERVAL):], post_pad), axis=1)
     test_speech_features_feat = speech_features_feat.reshape((test_speech_features.shape[0], test_speech_features.shape[1], -1))
 
-    print('test_mfcc shape', test_mfcc.shape, 'test_feat shape', test_feat.shape,
-          'test_speech_features shape', test_speech_features.shape,
-          'test speech features feat shape', test_speech_features_feat.shape)
+    print('test_mfcc.shape', test_mfcc.shape)
+    print('test_feat.shape', test_feat.shape,
+          'test_speech_features.shape', test_speech_features.shape,
+          'test_speech_features_feat.shape', test_speech_features_feat.shape)
 
     # debug
     # train_wavlm = np.zeros((2, 2, 2))
@@ -273,7 +277,8 @@ def load_db_codebook(data_file, codepath, test_data_path, train_wavlm, test_wavl
         test_wavlm_feat[:, :, i, :] = np.concatenate((test_wavlm_interpolate[:, (i * (FRAME_INTERVAL - 2)):], post_pad), axis=1)
     test_wavlm_feat = test_wavlm_feat.reshape((test_wavlm_interpolate.shape[0], test_wavlm_interpolate.shape[1], -1))
 
-    print('train_wavlm_feat shape', train_wavlm_feat.shape, 'test_wavlm_feat shape', test_wavlm_feat.shape)
+    print('train_wavlm_feat.shape', train_wavlm_feat.shape)
+    print('test_wavlm_feat.shape', test_wavlm_feat.shape)
 
     train_wavvq = np.load(train_wavvq)['wavvq']
     test_wavvq = np.load(test_wavvq)['wavvq']
@@ -334,7 +339,8 @@ def load_db_codebook(data_file, codepath, test_data_path, train_wavlm, test_wavl
 
     test_wavvq_feat = np.concatenate((test_wavvq_feat1, test_wavvq_feat2), axis=-1)
 
-    print('train_wavvq_feat shape', train_wavvq_feat.shape, 'test_wavvq_feat shape', test_wavvq_feat.shape)
+    print('train_wavvq_feat.shape', train_wavvq_feat.shape)
+    print('test_wavvq_feat.shape', test_wavvq_feat.shape)
 
     train_phase = np.load(data_file, allow_pickle=True)['phase']  # n, len, 4 (1 * 8 * 1)
     test_phase = np.load(test_data_path, allow_pickle=True)['phase']

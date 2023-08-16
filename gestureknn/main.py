@@ -5,9 +5,11 @@ import os
 import Levenshtein
 import pdb
 
+from .args import get_configs
 from .utils import normalize_data
 from .data_processing import load_db_codebook, calc_data_stats
-
+from .codeknn import CodeKNN
+args = get_configs()
 
 def predict_code_from_audio(train_mfcc, train_code, test_mfcc, data_stats, train_feat, test_feat, train_wavlm, test_wavlm,
                             train_wavlm_feat, test_wavlm_feat, speech_features, test_speech_features,
@@ -101,7 +103,7 @@ def predict_code_from_audio(train_mfcc, train_code, test_mfcc, data_stats, train
     return np.array(motion_output)
 
 
-def gestureknn(args):
+def gestureknn():
     # (num_seq, NUM_MFCC_FEAT, num_frames=240), (num_seq, num_frames_code=30), (num_seq, NUM_MFCC_FEAT, num_frames=3600)
     train_mfcc, train_code, test_mfcc, train_feat, test_feat, train_wavlm, test_wavlm, train_wavlm_feat, \
         test_wavlm_feat, speech_features, test_speech_features, train_speech_features_feat, test_speech_features_feat, \
@@ -111,23 +113,23 @@ def gestureknn(args):
     feat_train_mean, feat_train_std, _, _ = calc_data_stats(train_feat.transpose((0, 2, 1)), test_feat.transpose((0, 2, 1)))
     speech_features_train_mean, speech_features_train_std, _, _ = calc_data_stats(speech_features.transpose((0, 2, 1)), test_speech_features.transpose((0, 2, 1)))
     speech_features_feat_train_mean, speech_features_feat_train_std, _, _ = calc_data_stats(train_speech_features_feat.transpose((0, 2, 1)), test_speech_features_feat.transpose((0, 2, 1)))
-    # data_stats = {
-    #     'mfcc_train_mean': mfcc_train_mean,
-    #     'mfcc_train_std': mfcc_train_std,
-    #     'feat_train_mean': feat_train_mean,
-    #     'feat_train_std': feat_train_std,
-    #     'speech_features_train_mean': speech_features_train_mean,
-    #     'speech_features_train_std': speech_features_train_std,
-    #     'speech_features_feat_train_mean': speech_features_feat_train_mean,
-    #     'speech_features_feat_train_std': speech_features_feat_train_std
-    # }
-    # pred_seqs = predict_code_from_audio(train_mfcc, train_code, test_mfcc, data_stats, train_feat, test_feat, train_wavlm, test_wavlm,
-    #                                     train_wavlm_feat, test_wavlm_feat, speech_features, test_speech_features,
-    #                                     train_speech_features_feat, test_speech_features_feat, train_wavvq_feat, test_wavvq_feat,
-    #                                     train_phase, test_phase, train_context, test_context,
-    #                                     use_feature=True, use_wavlm=True, use_freq=False, use_speechfeat=False,
-    #                                     use_wavvq=False, use_phase=True, use_txt=True, use_aud=True, frames=args.max_frames)  # if use wavlm, frames should be 15, and test_data should be 240
-    # print(pred_seqs.shape)
+    data_stats = {
+        'mfcc_train_mean': mfcc_train_mean,
+        'mfcc_train_std': mfcc_train_std,
+        'feat_train_mean': feat_train_mean,
+        'feat_train_std': feat_train_std,
+        'speech_features_train_mean': speech_features_train_mean,
+        'speech_features_train_std': speech_features_train_std,
+        'speech_features_feat_train_mean': speech_features_feat_train_mean,
+        'speech_features_feat_train_std': speech_features_feat_train_std
+    }
+    pred_seqs = predict_code_from_audio(train_mfcc, train_code, test_mfcc, data_stats, train_feat, test_feat, train_wavlm, test_wavlm,
+                                        train_wavlm_feat, test_wavlm_feat, speech_features, test_speech_features,
+                                        train_speech_features_feat, test_speech_features_feat, train_wavvq_feat, test_wavvq_feat,
+                                        train_phase, test_phase, train_context, test_context,
+                                        use_feature=True, use_wavlm=True, use_freq=False, use_speechfeat=False,
+                                        use_wavvq=False, use_phase=True, use_txt=True, use_aud=True, frames=args.max_frames)  # if use wavlm, frames should be 15, and test_data should be 240
+    print(pred_seqs.shape)
     # np.savez_compressed(args.out_knn_filename, knn_pred=pred_seqs)
 
     print("Saved done!")
