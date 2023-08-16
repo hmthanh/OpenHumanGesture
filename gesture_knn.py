@@ -10,8 +10,4 @@ from gestureknn.main import gestureknn
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    args = get_configs()
-
-    print("args", args)
-
-    gestureknn(args)
+    gestureknn()

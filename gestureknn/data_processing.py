@@ -244,9 +244,9 @@ def load_db_codebook(data_file, codepath, test_data_path, train_wavlm, test_wavl
     test_speech_features_feat = speech_features_feat.reshape((test_speech_features.shape[0], test_speech_features.shape[1], -1))
 
     print('test_mfcc.shape', test_mfcc.shape)
-    print('test_feat.shape', test_feat.shape,
-          'test_speech_features.shape', test_speech_features.shape,
-          'test_speech_features_feat.shape', test_speech_features_feat.shape)
+    print('test_feat.shape', test_feat.shape)
+    print('test_speech_features.shape', test_speech_features.shape)
+    print('test_speech_features_feat.shape', test_speech_features_feat.shape)
 
     # debug
     # train_wavlm = np.zeros((2, 2, 2))

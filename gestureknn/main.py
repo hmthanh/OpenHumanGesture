@@ -1,6 +1,6 @@
 import numpy as np
 import torch
-import tqdm
+from tqdm import tqdm
 import os
 import Levenshtein
 import pdb
@@ -9,7 +9,9 @@ from .args import get_configs
 from .utils import normalize_data
 from .data_processing import load_db_codebook, calc_data_stats
 from .codeknn import CodeKNN
+
 args = get_configs()
+
 
 def predict_code_from_audio(train_mfcc, train_code, test_mfcc, data_stats, train_feat, test_feat, train_wavlm, test_wavlm,
                             train_wavlm_feat, test_wavlm_feat, speech_features, test_speech_features,
@@ -130,6 +132,6 @@ def gestureknn():
                                         use_feature=True, use_wavlm=True, use_freq=False, use_speechfeat=False,
                                         use_wavvq=False, use_phase=True, use_txt=True, use_aud=True, frames=args.max_frames)  # if use wavlm, frames should be 15, and test_data should be 240
     print(pred_seqs.shape)
-    # np.savez_compressed(args.out_knn_filename, knn_pred=pred_seqs)
+    np.savez_compressed(args.out_knn_filename, knn_pred=pred_seqs)
 
     print("Saved done!")
