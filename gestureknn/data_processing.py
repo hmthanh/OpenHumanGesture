@@ -263,7 +263,10 @@ def load_db_codebook(data_file, codepath, test_data_path, train_wavlm, test_wavl
     new_wavlm_frames = nums_wavlm_frames // code.shape[-1] * code.shape[-1]
     train_wavlm_interpolate = F.interpolate(torch.from_numpy(train_wavlm).transpose(1, 2), size=new_wavlm_frames, align_corners=True, mode='linear').transpose(1, 2).numpy()
     test_wavlm_interpolate = F.interpolate(torch.from_numpy(test_wavlm).transpose(1, 2), size=new_wavlm_frames, align_corners=True, mode='linear').transpose(1, 2).numpy()
-    print(train_wavlm.shape, test_wavlm.shape, train_wavlm_interpolate.shape, test_wavlm_interpolate.shape)
+    print("train_wavlm.shape", train_wavlm.shape)
+    print("test_wavlm.shape", test_wavlm.shape)
+    print("train_wavlm_interpolate.shape", train_wavlm_interpolate.shape)
+    print("test_wavlm_interpolate.shape", test_wavlm_interpolate.shape)
 
     train_wavlm_feat = np.zeros((train_wavlm_interpolate.shape[0], train_wavlm_interpolate.shape[1], NUM_AUDIO_FEAT_FRAMES, train_wavlm_interpolate.shape[-1]))
     for i in range(NUM_AUDIO_FEAT_FRAMES):
