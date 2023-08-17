@@ -4,7 +4,7 @@ import argparse
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Codebook')
-    parser.add_argument('--config', default='./configs/codebook.yml')
+    parser.add_argument('--configs', default='./configs/codebook.yml')
     parser.add_argument('--gpu', type=str, default='2')
     parser.add_argument('--no_cuda', type=list, default=['2'])
     parser.add_argument('--prefix', type=str, required=False, default='knn_pred_wavvq')
