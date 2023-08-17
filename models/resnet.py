@@ -3,7 +3,7 @@ import math
 # import models.utils.dist_adapter as dist
 import torch.nn as nn
 
-import model.utils.dist_adapter as dist
+import models.utils.dist_adapter as dist
 from .utils.checkpoint import checkpoint
 
 

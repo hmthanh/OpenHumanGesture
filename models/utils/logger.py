@@ -1,11 +1,10 @@
-import torch as t
-import model.utils.dist_adapter as dist
-from tqdm import tqdm
-from datetime import date
 import os
 import sys
 
-import sys
+import torch as t
+from tqdm import tqdm
+
+import models.utils.dist_adapter as dist
 
 sys.path.append(os.path.dirname(os.path.dirname(sys.path[0])))
 from configs.parse_args import parse_args
