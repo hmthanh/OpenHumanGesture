@@ -131,7 +131,7 @@ def gestureknn():
                                         train_phase, test_phase, train_context, test_context,
                                         use_feature=True, use_wavlm=True, use_freq=False, use_speechfeat=False,
                                         use_wavvq=False, use_phase=True, use_txt=True, use_aud=True, frames=args.max_frames)  # if use wavlm, frames should be 15, and test_data should be 240
-    print(pred_seqs.shape)
+    print("pred_seqs.shape", pred_seqs.shape)
     np.savez_compressed(args.out_knn_filename, knn_pred=pred_seqs)
 
     print("Saved done!")
