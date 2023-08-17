@@ -1,5 +1,6 @@
-import torch.distributed as dist
 from enum import Enum
+
+import torch.distributed as dist
 
 
 class ReduceOp(Enum):

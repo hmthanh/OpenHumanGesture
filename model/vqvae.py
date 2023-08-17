@@ -4,14 +4,13 @@ import numpy as np
 import torch as t
 import torch.nn as nn
 
-from .encdec import Encoder, Decoder, assert_shape
+from configs.parse_args import parse_args
 from .bottleneck import NoBottleneck, Bottleneck
+from .decoder import Decoder
+from .encoder import Encoder, assert_shape
 from .utils.logger import average_metrics
 
-import sys
-
-[sys.path.append(i) for i in ['.', '..']]
-from configs.parse_args import parse_args
+# from configs.parse_args import parse_args
 
 args = parse_args()
 mydevice = t.device('cuda:' + args.gpu)
@@ -311,7 +310,7 @@ class VQVAE(nn.Module):
 if __name__ == '__main__':
     '''
     cd codebook/
-    python -m models.vqvae --config=./configs/codebook.yml --train --no_cuda 2 --gpu 2
+    python -m models.vqvae --configs=./configs/codebook.yml --train --no_cuda 2 --gpu 2
     '''
     import yaml
     from pprint import pprint
