@@ -27,7 +27,7 @@ def make_beat_gesture_audio_dataset(root, save_dir):
 
     gesture_path = os.path.join(save_dir, 'Motion')
     audio_path = os.path.join(save_dir, 'Audio')
-    # TODO: add text process
+    #3TODO: add text process
     # text_path = os.path.join(base_path, 'Transcripts')
 
     if not os.path.exists(gesture_path):
