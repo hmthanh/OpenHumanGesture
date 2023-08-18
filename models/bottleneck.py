@@ -4,15 +4,11 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from configs.parse_args import parse_args
-import numpy as np
-import torch as t
-import torch.nn as nn
-import torch.nn.functional as F
-
-from configs.parse_args import parse_args
 
 args = parse_args()
 mydevice = t.device('cuda:' + args.gpu)
+
+# print("Device: ", t.cuda.get_device_name(int(args.gpu)))
 
 
 class BottleneckBlock(nn.Module):
@@ -271,3 +267,8 @@ if __name__ == '__main__':
     x = t.rand(32, 512, 30)
     model = BottleneckBlock(k_bins=512, emb_width=512, mu=0.99)
     zs, xs_quantised, commit_losses, quantiser_metrics = model(x)
+
+    print("zs", zs.shape)
+    print("xs_quantised", xs_quantised.shape)
+    print("commit_losses", commit_losses.shape)
+    print("quantiser_metrics", quantiser_metrics)
