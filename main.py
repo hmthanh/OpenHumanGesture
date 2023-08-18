@@ -11,6 +11,8 @@ from configs.parse_args import parse_args
 from models.vqvae import VQVAE
 from process.beat_data_to_lmdb import process_bvh
 from process.process_bvh import make_bvh_GENEA2020_BT
+from process.bvh_to_position import bvh_to_npy
+from process.visualize_bvh import visualize
 
 args = parse_args()
 
