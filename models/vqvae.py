@@ -1,8 +1,11 @@
 import pdb
+from pprint import pprint
 
 import numpy as np
 import torch as t
 import torch.nn as nn
+import yaml
+from easydict import EasyDict
 
 from configs.parse_args import parse_args
 from .bottleneck import NoBottleneck, Bottleneck
@@ -312,9 +315,10 @@ if __name__ == '__main__':
     cd codebook/
     python -m models.vqvae --configs=./configs/codebook.yml --train --no_cuda 2 --gpu 2
     '''
-    import yaml
-    from pprint import pprint
-    from easydict import EasyDict
+    # from bottleneck import NoBottleneck, Bottleneck
+    # from decoder import Decoder
+    # from encoder import Encoder, assert_shape
+    # from utils.logger import average_metrics
 
     with open(args.config) as f:
         config = yaml.safe_load(f)

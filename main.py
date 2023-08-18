@@ -10,11 +10,9 @@ from easydict import EasyDict
 from configs.parse_args import parse_args
 from models.vqvae import VQVAE
 from process.beat_data_to_lmdb import process_bvh
-from process.process_bvh import make_bvh_GENEA2020_BT
 from process.bvh_to_position import bvh_to_npy
+from process.process_bvh import make_bvh_GENEA2020_BT
 from process.visualize_bvh import visualize
-
-args = parse_args()
 
 
 def visualize_code(args, model_path, save_path, prefix, code_source, normalize=True):
@@ -58,7 +56,7 @@ def visualize_code(args, model_path, save_path, prefix, code_source, normalize=T
 def visualizeCodeAndWrite(code_path=None, save_path="./output/",
                           prefix=None, pipeline_path="./dataset/data_pipe_60_rotation.sav",
                           generateGT=True, code_source=None, vis=True):
-    bvh_path = '../dataset/BEAT0909/Motion/1_wayne_0_103_110.bvh'
+    bvh_path = './dataset/BEAT0909/Motion/1_wayne_0_103_110.bvh'
     model_path = config.VQVAE_model_path
     # bvh_path = "/mnt/nfs7/y50021900/My/data/Trinity_Speech-Gesture_I/GENEA_Challenge_2020_data_release/Test_data/Motion/TestSeq001.bvh"
     # model_path = '/mnt/nfs7/y50021900/My/codebook/Trinity_output_60fps_rotation/train_codebook/' + "codebook_checkpoint_best.bin"
@@ -99,7 +97,7 @@ if __name__ == '__main__':
     args = parse_args()
     # print("args", args)
 
-    with open(args.config) as f:
+    with open(args.configs) as f:
         config = yaml.safe_load(f)
 
     for k, v in vars(args).items():
@@ -109,5 +107,8 @@ if __name__ == '__main__':
     config = EasyDict(config)
     mydevice = torch.device('cuda:' + config.gpu)
     config.no_cuda = config.gpu
+
+    print(config.no_cuda)
+    # model = VQVAE(config.VQVAE, 15 * 9)
 
     visualizeCodeAndWrite(code_path=config.code_path, prefix=config.prefix, generateGT=False, save_path=config.save_path)

@@ -8,6 +8,7 @@ from configs.parse_args import parse_args
 args = parse_args()
 mydevice = t.device('cuda:' + args.gpu)
 
+
 # print("Device: ", t.cuda.get_device_name(int(args.gpu)))
 
 
